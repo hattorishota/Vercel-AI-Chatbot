@@ -35,6 +35,7 @@ export function ChatPanel({
       <ButtonScrollToBottom />
       <div className="mx-auto sm:max-w-2xl sm:px-4">
         <div className="flex h-10 items-center justify-center">
+          {/* 回答を生成中はstop generatingを表示させ、それ以外（会話があれば）ではregenerate responseにする */}
           {isLoading ? (
             <Button
               variant="outline"

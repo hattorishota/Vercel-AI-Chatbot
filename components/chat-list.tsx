@@ -1,3 +1,4 @@
+// 会話のやり取りを内包するコンポーネント
 import { type Message } from 'ai'
 
 import { Separator } from '@/components/ui/separator'

@@ -37,14 +37,20 @@ export function PromptForm({
 
   return (
     <form
+      // フォームが送信されるときに実行される関数を定義
       onSubmit={async e => {
+        // フォームのデフォルトの送信動作を防止
         e.preventDefault()
+        // テキストが空である場合はフォームの送信をしない
         if (!input?.trim()) {
           return
         }
+        // フォームの送信後、inputを空にする
         setInput('')
+        // onSubmit関数を実行
         await onSubmit(input)
       }}
+      // フォームの参照を設定
       ref={formRef}
     >
       <div className="relative flex max-h-60 w-full grow flex-col overflow-hidden bg-background px-8 sm:rounded-md sm:border sm:px-12">

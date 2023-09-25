@@ -1,3 +1,4 @@
+// チャット全体のコンポーネント
 'use client'
 
 import { useChat, type Message } from 'ai/react'
@@ -34,6 +35,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   )
   const [previewTokenDialog, setPreviewTokenDialog] = useState(IS_PREVIEW)
   const [previewTokenInput, setPreviewTokenInput] = useState(previewToken ?? '')
+  // カスタムフックを使用して、チャット関連の状態と関数を取得
   const { messages, append, reload, stop, isLoading, input, setInput } =
     useChat({
       initialMessages,
@@ -42,6 +44,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         id,
         previewToken
       },
+      // サーバーからの応答を処理するためのコールバック関数
       onResponse(response) {
         if (response.status === 401) {
           toast.error(response.statusText)

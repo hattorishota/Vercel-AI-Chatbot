@@ -1,3 +1,4 @@
+// チャットがまだない時に表示する画面
 import { UseChatHelpers } from 'ai/react'
 
 import { Button } from '@/components/ui/button'

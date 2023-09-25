@@ -1,3 +1,4 @@
+// 外部へリンクするときに使うコンポーネント
 export function ExternalLink({
   href,
   children

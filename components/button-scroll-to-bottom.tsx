@@ -1,3 +1,4 @@
+// 下にスクロールするボタンを表示するコンポーネント
 'use client'
 
 import * as React from 'react'

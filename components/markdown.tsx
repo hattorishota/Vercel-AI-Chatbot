@@ -1,3 +1,4 @@
+// マークダウンを表示するコンポーネント
 import { FC, memo } from 'react'
 import ReactMarkdown, { Options } from 'react-markdown'
 

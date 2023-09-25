@@ -1,3 +1,4 @@
+// ホバー時にコピーするかを聞くボタンを表示させるコンポーネント 
 'use client'
 
 import { type Message } from 'ai'

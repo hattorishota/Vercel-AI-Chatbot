@@ -1,3 +1,4 @@
+// NextAuthを使うための設定ファイル
 import NextAuth, { type DefaultSession } from 'next-auth'
 import GitHub from 'next-auth/providers/github'
 
