@@ -1,6 +1,6 @@
 // NextAuthを使うための設定ファイル
 import NextAuth, { type DefaultSession } from 'next-auth'
-import GoogleProvider from "next-auth/providers/google";
+import GitHubProvider from "next-auth/providers/github";
 
 declare module 'next-auth' {
   interface Session {
@@ -17,27 +17,18 @@ export const {
   CSRF_experimental // will be removed in future
 } = NextAuth({
   providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET
-    }),
+    GitHubProvider({
+      clientId: process.env.GITHUB_ID,
+      clientSecret: process.env.GITHUB_SECRET
+    })
   ],
-  secret: process.env.NEXT_PUBLIC_SECRET,
   callbacks: {
     jwt({ token, profile }) {
       if (profile) {
         token.id = profile.id
-        token.image = profile.avatar_url || profile.picture
+        token.image = profile.picture
       }
       return token
-    },
-    async signIn({ account, profile }: { account: any | null; profile?: any }) {
-      if (account?.provider === "google") {
-        console.log("account:" + account);
-        console.log("profile:" + profile);
-        return Promise.resolve(profile?.email_verified && (profile?.email?.endsWith("@crowdworks.co.jp") ?? false));
-      }
-      return Promise.resolve(true); // Do different verification for other providers that don't have `email_verified`
     },
     authorized({ auth }) {
       return !!auth?.user // this ensures there is a logged in user for -every- request

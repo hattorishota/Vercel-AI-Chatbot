@@ -47,6 +47,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
       // サーバーからの応答を処理するためのコールバック関数
       onResponse(response) {
         if (response.status === 401) {
+          console.log("onResponse401error");
           toast.error(response.statusText)
         }
       }

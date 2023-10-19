@@ -27,7 +27,7 @@ export function LoginButton({
         setIsLoading(true)
         // next-auth signIn() function doesn't work yet at Edge Runtime due to usage of BroadcastChannel
         // 認証プロバイダ（google）、{ callbackUrl: / } は認証成功後のリダイレクト先URLを指定
-        signIn('google', { callbackUrl: process.env.CALLBACK_URL })
+        signIn('github', { callbackUrl: `http://localhost:3001/` })
       }}
       // ログインボタンをクリックした際に、isLoading を true に設定し、ボタンを無効化
       disabled={isLoading}
