@@ -65,7 +65,7 @@ export function UserMenu({ user }: UserMenuProps) {
           <DropdownMenuItem
             onClick={() =>
               signOut({
-                callbackUrl: '/'
+                callbackUrl: '/sign-in'
               })
             }
             className="text-xs"
