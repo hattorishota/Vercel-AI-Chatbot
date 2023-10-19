@@ -22,7 +22,15 @@ export const {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET
     }),
   ],
+  secret: process.env.NEXT_PUBLIC_SECRET,
   callbacks: {
+    jwt({ token, profile }) {
+      if (profile) {
+        token.id = profile.id
+        token.image = profile.avatar_url || profile.picture
+      }
+      return token
+    },
     async signIn({ account, profile }: { account: any | null; profile?: any }) {
       if (account?.provider === "google") {
         console.log("account:" + account);
