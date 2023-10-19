@@ -5,16 +5,17 @@ import { signIn } from 'next-auth/react'
 
 import { cn } from '@/lib/utils'
 import { Button, type ButtonProps } from '@/components/ui/button'
-import { IconGitHub, IconSpinner } from '@/components/ui/icons'
+import { IconSpinner } from '@/components/ui/icons'
+import { FcGoogle } from 'react-icons/fc'
 
 interface LoginButtonProps extends ButtonProps {
-  showGithubIcon?: boolean
+  showGoogleIcon?: boolean
   text?: string
 }
 
 export function LoginButton({
-  text = 'Login with GitHub',
-  showGithubIcon = true,
+  text = 'Login with Google',
+  showGoogleIcon = true,
   className,
   ...props
 }: LoginButtonProps) {
@@ -25,7 +26,7 @@ export function LoginButton({
       onClick={() => {
         setIsLoading(true)
         // next-auth signIn() function doesn't work yet at Edge Runtime due to usage of BroadcastChannel
-        // 認証プロバイダ（gitHub）、{ callbackUrl: / } は認証成功後のリダイレクト先URLを指定
+        // 認証プロバイダ（google）、{ callbackUrl: / } は認証成功後のリダイレクト先URLを指定
         signIn('google', { callbackUrl: process.env.CALLBACK_URL })
       }}
       // ログインボタンをクリックした際に、isLoading を true に設定し、ボタンを無効化
@@ -35,8 +36,8 @@ export function LoginButton({
     >
       {isLoading ? (
         <IconSpinner className="mr-2 animate-spin" />
-      ) : showGithubIcon ? (
-        <IconGitHub className="mr-2" />
+      ) : showGoogleIcon ? (
+        <FcGoogle className="mr-2" />
       ) : null}
       {text}
     </Button>
