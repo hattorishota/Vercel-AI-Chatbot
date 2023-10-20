@@ -8,6 +8,7 @@ declare module 'next-auth' {
     user: {
       /** The user's id. */
       id: string
+      sub: string,
     } & DefaultSession['user']
   }
 }
@@ -31,7 +32,7 @@ export const {
   callbacks: {
     jwt({ token, profile }) {
       if (profile) {
-        token.id = profile.id
+        token.id = String(profile.sub);
         token.image = profile.picture
       }
       return token
