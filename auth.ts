@@ -37,6 +37,14 @@ export const {
       }
       return token
     },
+    async signIn({ account, profile }: { account: any | null; profile?: any }) {
+      if (account?.provider === "google") {
+        console.log("account:" + account);
+        console.log("profile:" + profile);
+        return Promise.resolve(profile?.email_verified && (profile?.email?.endsWith("@crowdworks.co.jp") ?? false));
+      }
+      return Promise.resolve(true); // Do different verification for other providers that don't have `email_verified`
+    },
     authorized({ auth }) {
       return !!auth?.user // this ensures there is a logged in user for -every- request
     }
