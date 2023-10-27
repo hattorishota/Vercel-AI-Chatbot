@@ -53,6 +53,9 @@ export default async function ChatPage({ params }: ChatPageProps) {
 
   // チャットのユーザーIDが認証されたユーザーのIDと一致しない場合、notFound 関数を使用して404ページへ移動
   if (chat?.userId !== session?.user?.id) {
+    console.log("chat_id" + chat?.userId);
+    console.log("session_id" + session?.user?.id);
+
     notFound()
   }
 
