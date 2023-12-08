@@ -10,6 +10,8 @@ import { type Chat } from '@/lib/types'
 
 // ユーザーに関連するチャットデータを取得するための関数
 export async function getChats(userId?: string | null) {
+  console.log(userId);
+  
   // ユーザーが指定されていない場合は空の配列を返す
   if (!userId) {
     return []

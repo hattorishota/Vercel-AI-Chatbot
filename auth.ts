@@ -3,6 +3,7 @@ import NextAuth, { type DefaultSession } from 'next-auth'
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 
+export const isDevelopment = (): boolean => process.env.NODE_ENV === 'development';
 declare module 'next-auth' {
   interface Session {
     user: {
@@ -10,6 +11,20 @@ declare module 'next-auth' {
       id: string
       sub: string,
     } & DefaultSession['user']
+  }
+}
+
+let googleClient: Object;
+
+if (isDevelopment()) {
+  googleClient = {
+    clientId: process.env.GOOGLE_CLIENT_ID_LOCAL,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET_LOCAL
+  }
+} else {
+  googleClient = {
+    clientId: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET
   }
 }
 
@@ -23,12 +38,9 @@ export const {
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET
     }),
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET
-    })
+    GoogleProvider(googleClient)
   ],
-  secret: process.env.NEXT_PUBLIC_SECRET,
+  // secret: process.env.NEXT_PUBLIC_SECRET,
   callbacks: {
     jwt({ token, profile }) {
       if (profile) {
